@@ -1,0 +1,19 @@
+
+default: &default
+  adapter: mysql2
+  pool: 5
+  timeout: 5000
+  username: root
+  password: 46921395
+
+development:
+  <<: *default
+  database: rbolg_development
+
+test:
+  <<: *default
+  database: rbolg_test
+
+production:
+  <<: *default
+  database: rbolg_production

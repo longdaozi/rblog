@@ -1,11 +1,28 @@
 <header class="navbar navbar-fixed-top navbar-inverse">
     <div class="container">
-    <%= link_to "实验用APP", root_path, id: "logo" %>
+    <%= link_to "实验博客", root_path, id: "logo" %>
       <nav>
         <ul class="nav navbar-nav navbar-right">
           <li><%= link_to "主页", root_path %></li>
           <li><%= link_to "帮助", help_path %></li>
-          <li><%= link_to "登录", '#' %></li>
+          <% if logged_in? %>
+            <li><%= link_to "Users", '#' %></li>
+            <li class="dropdown">
+			  <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+			  帐户 <b class="caret"></b>
+			  </a>
+			  <ul class="dropdown-menu">
+			    <li><%= link_to "用户档案", current_user %></li>
+			    <li><%= link_to "设置", '#' %></li>
+			    <li class="divider"></li>
+			    <li>
+				<%= link_to "退出登录", logout_path, method: "delete" %>
+				</li>
+			  </ul>
+			</li>
+		  <% else %>
+		    <li><%= link_to "登录", login_path %></li>
+		  <% end %>
         </ul>
       </nav>
     </div>

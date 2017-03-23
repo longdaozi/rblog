@@ -7,6 +7,10 @@
       <%= f.email_field :email, class: 'form-control' %>
       <%= f.label :password, "密码/passw" %>
       <%= f.password_field :password, class: 'form-control' %>
+      <%= f.label :remember_me, class: "checkbox inline" do %>
+	    <%= f.check_box :remember_me %>
+	    <span>在这台计算机上记住我</span>
+	  <% end %>
       <%= f.submit "登陆", class: "btn btn-primary" %>
     <% end %>
     <p>还没有账号？ <%= link_to "点击注册", signup_path %></p>

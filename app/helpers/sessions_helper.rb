@@ -9,6 +9,10 @@ module SessionsHelper
 		cookies.permanent.signed[:user_id] = user.id
 		cookies.permanent[:remember_token] = user.remember_token
 	end
+	#  如果指定用户是当前用户，返回 true
+    def current_user?(user)
+      user == current_user
+    end
 	#  返回 cookie  中记忆令牌对应的用户
 	def current_user
 	  if (user_id = session[:user_id])
@@ -37,4 +41,13 @@ module SessionsHelper
 		session.delete(:user_id)
 		@current_user = nil
 	end
+	#  重定向到存储的地址或者默认地址
+    def redirect_back_or(default)
+      redirect_to(session[:forwarding_url] || default)
+      session.delete(:forwarding_url)
+    end
+    #  存储后面需要使用的地址
+    def store_location
+      session[:forwarding_url] = request.original_url if request.get?
+    end
 end

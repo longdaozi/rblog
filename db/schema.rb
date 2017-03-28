@@ -17,6 +17,8 @@ ActiveRecord::Schema.define(version: 20170324090932) do
     t.integer  "user_id"
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
+    t.index ["user_id", "created_at"], name: "index_microposts_on_user_id_and_created_at", using: :btree
+    t.index ["user_id"], name: "index_microposts_on_user_id", using: :btree
   end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -30,4 +32,5 @@ ActiveRecord::Schema.define(version: 20170324090932) do
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
   end
 
+  add_foreign_key "microposts", "users"
 end
